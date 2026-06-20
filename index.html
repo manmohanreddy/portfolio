@@ -4,30 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Manmohan Reddy Mangunuru — Engineering Leader</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Google+Sans+Display:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f8f9fe;
-      --surface: rgba(255,255,255,0.72);
-      --surface-hover: rgba(255,255,255,0.88);
-      --surface-strong: rgba(255,255,255,0.92);
-      --border: rgba(0,0,0,0.08);
-      --border-strong: rgba(0,0,0,0.12);
-      --blue: #1a73e8;
-      --blue-light: rgba(26,115,232,0.10);
-      --blue-mid: rgba(26,115,232,0.18);
-      --purple: #7c3aed;
-      --teal: #0d9488;
-      --text: #1c1b1f;
-      --text-muted: #49454f;
-      --text-dim: #79747e;
-      --blur: blur(20px) saturate(160%);
-      --radius: 24px;
-      --radius-sm: 16px;
+      --bg:           #000000;
+      --glass:        rgba(255,255,255,0.06);
+      --glass-border: rgba(255,255,255,0.11);
+      --glass-hover:  rgba(255,255,255,0.10);
+      --blur:         blur(32px) saturate(200%);
+      --ios-blue:     #007AFF;
+      --ios-blue-dim: rgba(0,122,255,0.18);
+      --ios-teal:     #30D158;
+      --ios-purple:   #BF5AF2;
+      --text:         #ffffff;
+      --text-2:       rgba(255,255,255,0.60);
+      --text-3:       rgba(255,255,255,0.30);
+      --radius-xl:    28px;
+      --radius-lg:    20px;
+      --radius-md:    14px;
     }
 
     html { scroll-behavior: smooth; }
@@ -35,109 +30,87 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Google Sans', -apple-system, 'Segoe UI', system-ui, sans-serif;
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
       overflow-x: hidden;
-      min-height: 100vh;
+      line-height: 1.5;
     }
 
-    /* Gradient background blobs */
-    .bg-blobs {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-    }
-    .blob {
+    /* Ambient glow blobs */
+    .ambient { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .glow {
       position: absolute; border-radius: 50%;
-      filter: blur(80px); opacity: 0.35;
+      filter: blur(100px); opacity: 0.22;
+      animation: drift 18s ease-in-out infinite alternate;
     }
-    .blob-1 {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, #c7d9ff 0%, transparent 70%);
-      top: -200px; left: -200px;
-    }
-    .blob-2 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, #ddd6fe 0%, transparent 70%);
-      top: 20%; right: -150px;
-    }
-    .blob-3 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, #99f6e4 0%, transparent 70%);
-      bottom: 10%; left: 10%;
-    }
-    .blob-4 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, #fde68a 0%, transparent 70%);
-      bottom: -100px; right: 5%;
+    .glow-1 { width: 680px; height: 680px; background: #0040ff; top: -15%; left: -15%; animation-duration: 20s; }
+    .glow-2 { width: 520px; height: 520px; background: #6e00ff; top: 30%; right: -10%; animation-duration: 25s; animation-delay: -8s; }
+    .glow-3 { width: 440px; height: 440px; background: #00c6ff; bottom: 0; left: 20%; animation-duration: 22s; animation-delay: -5s; }
+
+    @keyframes drift {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(30px,-20px) scale(1.05); }
+      100% { transform: translate(-20px,30px) scale(0.95); }
     }
 
     /* ── NAV ── */
     nav {
-      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
-      z-index: 100;
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0 24px;
-      height: 52px;
-      width: min(900px, calc(100vw - 32px));
-      background: var(--surface-strong);
+      width: min(860px, calc(100% - 32px));
+      height: 50px; padding: 0 20px;
+      background: rgba(20,20,20,0.75);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
-      border: 1px solid var(--border);
+      border: 0.5px solid var(--glass-border);
       border-radius: 100px;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.08), 0 0 0 1px rgba(255,255,255,0.9) inset;
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.05) inset, 0 8px 32px rgba(0,0,0,0.5);
     }
-    .nav-brand {
-      font-size: 15px; font-weight: 700; letter-spacing: -0.01em;
-      color: var(--blue);
-      text-decoration: none;
-    }
-    .nav-links { display: flex; gap: 4px; list-style: none; }
+    .nav-brand { font-size: 14px; font-weight: 600; color: var(--text); text-decoration: none; }
+    .nav-links { display: flex; gap: 2px; list-style: none; }
     .nav-links a {
-      font-size: 13px; color: var(--text-muted);
-      text-decoration: none;
+      font-size: 13px; color: var(--text-2); text-decoration: none;
       padding: 6px 14px; border-radius: 100px;
-      transition: background 0.2s, color 0.2s;
+      transition: color 0.2s, background 0.2s;
     }
-    .nav-links a:hover { background: var(--blue-light); color: var(--blue); }
+    .nav-links a:hover { color: var(--text); background: var(--glass); }
 
     /* ── LAYOUT ── */
-    section { position: relative; z-index: 1; }
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-    .section-pad { padding: 96px 0; }
+    section { position: relative; z-index: 2; }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 24px; }
+    .section-pad { padding: 100px 0; }
 
-    /* ── SECTION HEADER ── */
-    .section-chip {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--blue-light);
-      border: 1px solid var(--blue-mid);
-      border-radius: 100px; padding: 4px 14px;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--blue);
-      margin-bottom: 16px;
+    .s-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.10em;
+      text-transform: uppercase; color: var(--ios-blue); margin-bottom: 10px;
     }
-    .section-title {
-      font-family: 'Google Sans Display', 'Google Sans', sans-serif;
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 700; letter-spacing: -0.02em;
-      color: var(--text);
+    .s-title {
+      font-size: clamp(30px, 4.5vw, 48px);
+      font-weight: 700; letter-spacing: -0.035em; line-height: 1.1;
       margin-bottom: 48px;
-      line-height: 1.15;
     }
 
     /* ── GLASS CARD ── */
-    .g-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+    .card {
+      background: var(--glass);
+      border: 0.5px solid var(--glass-border);
+      border-radius: var(--radius-xl);
       backdrop-filter: var(--blur);
       -webkit-backdrop-filter: var(--blur);
       padding: 36px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 8px 24px rgba(0,0,0,0.04);
-      transition: box-shadow 0.3s, background 0.3s, transform 0.2s;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.04) inset,
+        0 20px 60px rgba(0,0,0,0.5),
+        0 1px 0 rgba(255,255,255,0.07) inset;
+      transition: background 0.3s, transform 0.25s, box-shadow 0.25s;
     }
-    .g-card:hover {
-      background: var(--surface-hover);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 16px 40px rgba(0,0,0,0.06);
-      transform: translateY(-2px);
+    .card:hover {
+      background: var(--glass-hover);
+      transform: translateY(-3px);
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.07) inset,
+        0 28px 70px rgba(0,0,0,0.55),
+        0 1px 0 rgba(255,255,255,0.10) inset;
     }
 
     /* ── HERO ── */
@@ -145,242 +118,193 @@
       min-height: 100vh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
+      text-align: center; padding: 120px 24px 80px;
     }
-    .hero-eyebrow {
+    .status-pill {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--surface-strong);
-      border: 1px solid var(--border-strong);
-      border-radius: 100px; padding: 8px 20px;
-      font-size: 13px; font-weight: 500; color: var(--text-muted);
-      margin-bottom: 36px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      background: rgba(0,122,255,0.12);
+      border: 0.5px solid rgba(0,122,255,0.35);
+      border-radius: 100px; padding: 8px 18px;
+      font-size: 12px; font-weight: 500; color: var(--ios-blue);
+      margin-bottom: 40px;
+      box-shadow: 0 0 20px rgba(0,122,255,0.15);
     }
-    .hero-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      animation: pulse 2s infinite;
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--ios-blue); box-shadow: 0 0 8px var(--ios-blue);
+      animation: blink 2s ease-in-out infinite;
     }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.6;transform:scale(0.85)} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.35} }
 
     h1 {
-      font-family: 'Google Sans Display', 'Google Sans', sans-serif;
-      font-size: clamp(44px, 8vw, 96px);
-      font-weight: 700;
-      letter-spacing: -0.04em;
-      line-height: 1.0;
-      margin-bottom: 20px;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #1a73e8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: clamp(48px, 9vw, 104px);
+      font-weight: 700; letter-spacing: -0.05em; line-height: 0.95;
+      margin-bottom: 24px;
+    }
+    h1 .n1 { color: #fff; }
+    h1 .n2 {
+      background: linear-gradient(135deg, #007AFF 0%, #BF5AF2 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    .hero-sub {
-      font-size: clamp(16px, 2vw, 22px);
-      color: var(--text-muted); font-weight: 500;
-      margin-bottom: 12px; letter-spacing: -0.01em;
-    }
-    .hero-tagline {
-      font-size: clamp(14px, 1.6vw, 17px);
-      color: var(--text-dim);
-      max-width: 500px; margin: 0 auto 48px;
-      line-height: 1.75;
-    }
+    .hero-role { font-size: clamp(16px,2vw,21px); color: var(--text-2); margin-bottom: 14px; letter-spacing: -0.02em; }
+    .hero-pitch { font-size: clamp(14px,1.6vw,17px); color: var(--text-3); max-width: 480px; margin: 0 auto 52px; line-height: 1.75; }
 
-    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
+    .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 14px 28px; border-radius: 100px;
       font-size: 15px; font-weight: 600; font-family: inherit;
       text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.2s;
+      letter-spacing: -0.01em; transition: all 0.2s;
     }
-    .btn-primary {
-      background: var(--blue); color: #fff;
-      box-shadow: 0 2px 8px rgba(26,115,232,0.35);
+    .btn-ios {
+      background: var(--ios-blue); color: #fff;
+      box-shadow: 0 4px 20px rgba(0,122,255,0.45), 0 1px 0 rgba(255,255,255,0.2) inset;
     }
-    .btn-primary:hover { background: #1557b0; box-shadow: 0 4px 16px rgba(26,115,232,0.45); transform: translateY(-1px); }
+    .btn-ios:hover { background: #0062cc; box-shadow: 0 6px 28px rgba(0,122,255,0.55); transform: translateY(-1px); }
     .btn-ghost {
-      background: var(--surface-strong);
-      border: 1px solid var(--border-strong);
-      color: var(--text);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      background: var(--glass); border: 0.5px solid var(--glass-border); color: var(--text);
     }
-    .btn-ghost:hover { background: #fff; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,0.10); }
+    .btn-ghost:hover { background: var(--glass-hover); transform: translateY(-1px); }
 
-    .hero-stats {
-      display: flex; gap: 0; justify-content: center;
-      margin-top: 64px;
-      background: var(--surface-strong);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      backdrop-filter: var(--blur);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    .stats-row {
+      display: flex; margin-top: 72px;
+      background: var(--glass);
+      border: 0.5px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
       overflow: hidden;
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.04) inset, 0 20px 60px rgba(0,0,0,0.5);
+      max-width: 540px; width: 100%;
     }
-    .stat {
-      flex: 1; text-align: center; padding: 28px 32px;
-      position: relative;
-    }
+    .stat { flex: 1; text-align: center; padding: 28px 24px; position: relative; }
     .stat + .stat::before {
-      content: ''; position: absolute; left: 0; top: 20%; bottom: 20%;
-      width: 1px; background: var(--border);
+      content: ''; position: absolute; left: 0; top: 18%; bottom: 18%;
+      width: 0.5px; background: var(--glass-border);
     }
-    .stat-num {
-      font-family: 'Google Sans Display', sans-serif;
-      font-size: 38px; font-weight: 700; letter-spacing: -0.03em;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .stat-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; font-weight: 500; }
+    .stat-val { font-size: 38px; font-weight: 700; letter-spacing: -0.04em; }
+    .stat-val.blue   { color: var(--ios-blue); }
+    .stat-val.green  { color: var(--ios-teal); }
+    .stat-val.purple { color: var(--ios-purple); }
+    .stat-lbl { font-size: 11px; color: var(--text-3); margin-top: 4px; font-weight: 500; }
 
     /* ── ABOUT ── */
-    #about .about-grid {
+    .about-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.6fr 1fr;
       grid-template-rows: auto auto;
-      gap: 20px;
+      gap: 16px;
     }
     .about-main { grid-row: span 2; }
-    .about-main p { font-size: 17px; line-height: 1.8; color: var(--text-muted); }
+    .about-main p { font-size: 17px; line-height: 1.8; color: var(--text-2); }
     .about-main p + p { margin-top: 16px; }
     @media (max-width: 680px) {
-      #about .about-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
       .about-main { grid-row: span 1; }
     }
-    .mini-g {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      backdrop-filter: var(--blur);
+    .mini-card {
+      background: var(--glass); border: 0.5px solid var(--glass-border);
+      border-radius: var(--radius-lg); backdrop-filter: var(--blur);
       padding: 24px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 0 0 0.5px rgba(255,255,255,0.04) inset;
+      transition: transform 0.2s, background 0.2s;
     }
-    .mini-g:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.07); }
-    .mini-g-icon { font-size: 26px; margin-bottom: 10px; }
-    .mini-g-title { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-    .mini-g-body { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+    .mini-card:hover { transform: translateY(-2px); background: var(--glass-hover); }
+    .mini-icon { font-size: 24px; margin-bottom: 10px; }
+    .mini-title { font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+    .mini-body { font-size: 12px; color: var(--text-2); line-height: 1.65; }
 
     /* ── EXPERIENCE ── */
-    .exp-list { display: flex; flex-direction: column; gap: 20px; }
-    .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
-    .exp-role { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; color: var(--text); }
-    .exp-company { font-size: 14px; color: var(--blue); font-weight: 600; margin-top: 3px; }
-    .exp-period {
-      font-size: 12px; color: var(--blue);
-      background: var(--blue-light);
-      border: 1px solid var(--blue-mid);
-      border-radius: 100px; padding: 4px 14px;
-      font-weight: 600; white-space: nowrap;
+    .exp-stack { display: flex; flex-direction: column; gap: 16px; }
+    .exp-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+    .exp-role { font-size: 20px; font-weight: 700; letter-spacing: -0.025em; }
+    .exp-co { font-size: 13px; color: var(--ios-blue); font-weight: 600; margin-top: 3px; }
+    .exp-badge {
+      font-size: 11px; font-weight: 600; padding: 4px 12px; border-radius: 100px;
+      background: var(--ios-blue-dim); border: 0.5px solid rgba(0,122,255,0.3);
+      color: var(--ios-blue); white-space: nowrap;
     }
-    .exp-body { font-size: 15px; color: var(--text-muted); line-height: 1.75; }
-    .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-    .chip {
-      font-size: 12px; padding: 5px 14px;
-      border-radius: 100px;
-      background: var(--bg);
-      border: 1px solid var(--border-strong);
-      color: var(--text-muted); font-weight: 500;
+    .exp-body { font-size: 15px; color: var(--text-2); line-height: 1.75; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .tag {
+      font-size: 12px; padding: 5px 13px; border-radius: 100px;
+      background: rgba(255,255,255,0.06); border: 0.5px solid var(--glass-border);
+      color: var(--text-2);
     }
 
     /* ── ACHIEVEMENTS ── */
-    #achievements .ach-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+    .ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
+    .ach-card { position: relative; overflow: hidden; }
+    .ach-glow {
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px; border-radius: 50%;
+      filter: blur(60px); opacity: 0.25;
     }
-    .ach-card {
-      position: relative; overflow: hidden;
-    }
-    .ach-card-accent {
-      position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      border-radius: 3px 3px 0 0;
-    }
-    .ach-card-accent.blue { background: linear-gradient(90deg, var(--blue), #60a5fa); }
-    .ach-card-accent.purple { background: linear-gradient(90deg, var(--purple), #a78bfa); }
-    .ach-card-accent.teal { background: linear-gradient(90deg, var(--teal), #5eead4); }
-    .ach-icon { font-size: 36px; margin-bottom: 16px; }
-    .ach-metric {
-      font-family: 'Google Sans Display', sans-serif;
-      font-size: 48px; font-weight: 700; letter-spacing: -0.04em;
-      margin-bottom: 8px;
-    }
-    .ach-metric.blue { background: linear-gradient(135deg, var(--blue), #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .ach-metric.purple { background: linear-gradient(135deg, var(--purple), #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .ach-metric.teal { background: linear-gradient(135deg, var(--teal), #5eead4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .ach-title { font-size: 16px; font-weight: 700; margin-bottom: 10px; color: var(--text); }
-    .ach-desc { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+    .ach-glow.blue   { background: var(--ios-blue); }
+    .ach-glow.green  { background: var(--ios-teal); }
+    .ach-glow.purple { background: var(--ios-purple); }
+    .ach-icon { font-size: 34px; margin-bottom: 16px; }
+    .ach-num { font-size: 52px; font-weight: 700; letter-spacing: -0.05em; line-height: 1; margin-bottom: 8px; }
+    .ach-num.blue   { color: var(--ios-blue); }
+    .ach-num.green  { color: var(--ios-teal); }
+    .ach-num.purple { color: var(--ios-purple); }
+    .ach-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .ach-desc { font-size: 14px; color: var(--text-2); line-height: 1.65; }
 
     /* ── SKILLS ── */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 16px; }
+    .skill-label { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ios-blue); margin-bottom: 16px; }
+    .chip-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      font-size: 12px; padding: 5px 14px; border-radius: 100px;
+      background: rgba(255,255,255,0.06); border: 0.5px solid var(--glass-border);
+      color: var(--text-2);
     }
-    .skill-group-label {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
-      text-transform: uppercase; color: var(--blue);
-      margin-bottom: 16px;
-    }
-    .chip-list { display: flex; flex-wrap: wrap; gap: 8px; }
 
     /* ── CONTACT ── */
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     @media (max-width: 640px) { .contact-grid { grid-template-columns: 1fr; } }
-    .contact-text h3 {
-      font-family: 'Google Sans Display', sans-serif;
-      font-size: 28px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px;
-    }
-    .contact-text p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
-    .contact-links { display: flex; flex-direction: column; gap: 14px; }
-    .clink {
+    .c-head { font-size: 26px; font-weight: 700; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .c-body { font-size: 15px; color: var(--text-2); line-height: 1.7; margin-bottom: 28px; }
+    .c-links { display: flex; flex-direction: column; gap: 12px; }
+    .c-link {
       display: flex; align-items: center; gap: 14px;
-      padding: 16px 20px; border-radius: var(--radius-sm);
-      background: var(--bg);
-      border: 1px solid var(--border-strong);
+      padding: 16px 20px; border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.05); border: 0.5px solid var(--glass-border);
       text-decoration: none; color: var(--text);
-      transition: all 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
-    .clink:hover { background: #fff; transform: translateX(4px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
-    .clink-icon {
-      width: 42px; height: 42px; border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
-    }
-    .clink-icon.blue { background: var(--blue-light); }
-    .clink-icon.li { background: rgba(10,102,194,0.10); }
-    .clink-title { font-size: 13px; font-weight: 700; }
-    .clink-sub { font-size: 12px; color: var(--text-dim); }
+    .c-link:hover { background: var(--glass-hover); transform: translateX(4px); }
+    .c-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .c-icon.mail { background: rgba(0,122,255,0.15); }
+    .c-icon.li   { background: rgba(10,102,194,0.15); }
+    .c-link-title { font-size: 13px; font-weight: 600; }
+    .c-link-sub   { font-size: 12px; color: var(--text-3); }
 
-    /* ── FOOTER ── */
     footer {
-      text-align: center; padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      font-size: 13px; color: var(--text-dim);
-      position: relative; z-index: 1;
+      position: relative; z-index: 2;
+      text-align: center; padding: 36px 24px;
+      border-top: 0.5px solid var(--glass-border);
+      font-size: 12px; color: var(--text-3);
     }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.65s ease, transform 0.65s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 520px) { nav .nav-links { display: none; } }
   </style>
 </head>
 <body>
 
-  <div class="bg-blobs" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
-    <div class="blob blob-4"></div>
+  <div class="ambient" aria-hidden="true">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
   </div>
 
-  <!-- NAV -->
   <nav>
-    <a class="nav-brand" href="#hero">Manmohan R.</a>
+    <a class="nav-brand" href="#hero">MMR</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -392,29 +316,32 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-eyebrow">
-      <div class="hero-dot"></div>
+    <div class="status-pill">
+      <div class="status-dot"></div>
       Open to Engineering Manager &amp; Leadership roles
     </div>
-    <h1>Manmohan Reddy<br>Mangunuru</h1>
-    <p class="hero-sub">Lead Software Engineer at UKG Inc</p>
-    <p class="hero-tagline">10 years building reliable systems and leading high-performing teams. Ready to scale impact from engineering to leadership.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#contact">Get in Touch</a>
+    <h1>
+      <span class="n1">Manmohan</span><br>
+      <span class="n2">Reddy M.</span>
+    </h1>
+    <p class="hero-role">Lead Software Engineer · UKG Inc</p>
+    <p class="hero-pitch">10 years building reliable systems and leading teams. Driving the next chapter — people, strategy, and scale.</p>
+    <div class="cta-row">
+      <a class="btn btn-ios" href="#contact">Get in Touch</a>
       <a class="btn btn-ghost" href="#achievements">See My Impact</a>
     </div>
-    <div class="hero-stats reveal">
+    <div class="stats-row reveal">
       <div class="stat">
-        <div class="stat-num">10+</div>
-        <div class="stat-label">Years Experience</div>
+        <div class="stat-val blue">10+</div>
+        <div class="stat-lbl">Years Experience</div>
       </div>
       <div class="stat">
-        <div class="stat-num">8</div>
-        <div class="stat-label">Engineers Led</div>
+        <div class="stat-val green">8</div>
+        <div class="stat-lbl">Engineers Led</div>
       </div>
       <div class="stat">
-        <div class="stat-num">99.8%</div>
-        <div class="stat-label">SLA Achieved</div>
+        <div class="stat-val purple">99.8%</div>
+        <div class="stat-lbl">SLA Achieved</div>
       </div>
     </div>
   </section>
@@ -422,23 +349,23 @@
   <!-- ABOUT -->
   <section id="about" class="section-pad">
     <div class="container">
-      <div class="section-chip reveal">About</div>
-      <div class="section-title reveal">Engineer at heart.<br>Leader by design.</div>
+      <div class="s-label reveal">About</div>
+      <div class="s-title reveal">Engineer at heart.<br>Leader by nature.</div>
       <div class="about-grid">
-        <div class="g-card about-main reveal">
+        <div class="card about-main reveal">
           <p>I'm a Lead Software Engineer at UKG Inc with a decade of experience building reliable, scalable systems. I lead a team of 8 engineers and take ownership not just of code — but of outcomes, reliability, and team growth.</p>
-          <p>My focus is shifting from individual contribution to organizational impact. I believe the best engineering leaders don't just ship software — they build conditions for teams to do their best work, eliminate friction systematically, and hold a high bar for reliability.</p>
+          <p>My focus is shifting from individual contribution to organizational impact. The best engineering leaders don't just ship software — they build conditions for teams to do their best work, systematically eliminate friction, and hold a high bar for quality.</p>
           <p>I'm actively targeting Engineering Manager and senior leadership roles where I can shape teams, drive technical strategy, and deliver measurable business value at scale.</p>
         </div>
-        <div class="mini-g reveal">
-          <div class="mini-g-icon">🎯</div>
-          <div class="mini-g-title">Data-Driven Leadership</div>
-          <div class="mini-g-body">Measure before optimizing. Clear goals, visible metrics, no guesswork.</div>
+        <div class="mini-card reveal">
+          <div class="mini-icon">🎯</div>
+          <div class="mini-title">Data-Driven Leadership</div>
+          <div class="mini-body">Measure before optimizing. Clear goals, visible metrics, no guesswork.</div>
         </div>
-        <div class="mini-g reveal">
-          <div class="mini-g-icon">📈</div>
-          <div class="mini-g-title">People First</div>
-          <div class="mini-g-body">Team velocity compounds. Unblocking engineers beats solo heroics.</div>
+        <div class="mini-card reveal">
+          <div class="mini-icon">📈</div>
+          <div class="mini-title">People First</div>
+          <div class="mini-body">Team velocity compounds. Unblocking one engineer beats solo heroics.</div>
         </div>
       </div>
     </div>
@@ -447,50 +374,43 @@
   <!-- EXPERIENCE -->
   <section id="experience" class="section-pad">
     <div class="container">
-      <div class="section-chip reveal">Experience</div>
-      <div class="section-title reveal">Career journey</div>
-      <div class="exp-list">
-
-        <div class="g-card reveal">
-          <div class="exp-header">
+      <div class="s-label reveal">Experience</div>
+      <div class="s-title reveal">Career journey</div>
+      <div class="exp-stack">
+        <div class="card reveal">
+          <div class="exp-head">
             <div>
               <div class="exp-role">Lead Software Engineer</div>
-              <div class="exp-company">UKG Inc (Ultimate Kronos Group)</div>
+              <div class="exp-co">UKG Inc (Ultimate Kronos Group)</div>
             </div>
-            <div class="exp-period">Current</div>
+            <div class="exp-badge">Current</div>
           </div>
-          <div class="exp-body">
-            Leading a team of 8 engineers delivering workforce management solutions trusted by thousands of enterprises globally. Own technical direction, architecture decisions, and engineering health. Drive a culture of reliability — moving from reactive firefighting to proactive SLA ownership. Collaborate cross-functionally with product, QA, and infrastructure to align engineering with business commitments.
-          </div>
-          <div class="exp-tags">
-            <span class="chip">Team Leadership</span>
-            <span class="chip">SLA Engineering</span>
-            <span class="chip">Observability</span>
-            <span class="chip">Metrics & Dashboards</span>
-            <span class="chip">Architecture</span>
-            <span class="chip">Cross-functional</span>
+          <div class="exp-body">Leading a team of 8 engineers delivering workforce management solutions trusted by thousands of enterprises globally. Own technical direction, architecture decisions, and engineering health. Moved the team from reactive firefighting to proactive SLA ownership. Collaborate cross-functionally with product, QA, and infrastructure to align engineering with business commitments.</div>
+          <div class="tag-row">
+            <span class="tag">Team Leadership</span>
+            <span class="tag">SLA Engineering</span>
+            <span class="tag">Observability</span>
+            <span class="tag">Metrics & Dashboards</span>
+            <span class="tag">Architecture</span>
+            <span class="tag">Cross-functional</span>
           </div>
         </div>
-
-        <div class="g-card reveal">
-          <div class="exp-header">
+        <div class="card reveal">
+          <div class="exp-head">
             <div>
               <div class="exp-role">Senior Software Engineer</div>
-              <div class="exp-company">10+ Year Engineering Career</div>
+              <div class="exp-co">10+ Year Engineering Career</div>
             </div>
-            <div class="exp-period">Earlier Roles</div>
+            <div class="exp-badge">Earlier</div>
           </div>
-          <div class="exp-body">
-            Progressed through individual contributor roles building distributed systems, backend services, and platform infrastructure. Developed deep technical foundations across the stack, eventually taking on mentorship and informal leadership before stepping into the formal lead role at UKG.
-          </div>
-          <div class="exp-tags">
-            <span class="chip">Distributed Systems</span>
-            <span class="chip">Backend Engineering</span>
-            <span class="chip">Platform</span>
-            <span class="chip">Mentorship</span>
+          <div class="exp-body">Progressed through individual contributor roles building distributed systems, backend services, and platform infrastructure. Developed deep technical foundations, eventually taking on mentorship and informal leadership before stepping into the formal lead role at UKG.</div>
+          <div class="tag-row">
+            <span class="tag">Distributed Systems</span>
+            <span class="tag">Backend Engineering</span>
+            <span class="tag">Platform</span>
+            <span class="tag">Mentorship</span>
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -498,34 +418,30 @@
   <!-- ACHIEVEMENTS -->
   <section id="achievements" class="section-pad">
     <div class="container">
-      <div class="section-chip reveal">Impact</div>
-      <div class="section-title reveal">Results that matter</div>
+      <div class="s-label reveal">Impact</div>
+      <div class="s-title reveal">Results that matter</div>
       <div class="ach-grid">
-
-        <div class="g-card ach-card reveal">
-          <div class="ach-card-accent blue"></div>
+        <div class="card ach-card reveal">
+          <div class="ach-glow blue"></div>
           <div class="ach-icon">📊</div>
-          <div class="ach-metric blue">99.8%</div>
+          <div class="ach-num blue">99.8%</div>
           <div class="ach-title">SLA Achievement</div>
-          <div class="ach-desc">Drove SLA from 78% to 99.8% by building internal dashboards, instrumenting applications with real-time metrics, and establishing a continuous improvement loop to eliminate breach patterns.</div>
+          <div class="ach-desc">Drove SLA from 78% to 99.8% — built internal dashboards, instrumented apps with real-time metrics, and ran a continuous improvement loop to eliminate breach patterns.</div>
         </div>
-
-        <div class="g-card ach-card reveal">
-          <div class="ach-card-accent purple"></div>
+        <div class="card ach-card reveal">
+          <div class="ach-glow green"></div>
           <div class="ach-icon">🚀</div>
-          <div class="ach-metric purple">+21.8%</div>
+          <div class="ach-num green">+21.8%</div>
           <div class="ach-title">SLA Improvement</div>
-          <div class="ach-desc">Built the instrumentation layer, alerting strategy, and review cadence — then iterated relentlessly until the number moved. The team now owns it, not just me.</div>
+          <div class="ach-desc">Built the instrumentation layer, alerting strategy, and review cadence — then iterated relentlessly until the number moved. The team now owns it sustainably.</div>
         </div>
-
-        <div class="g-card ach-card reveal">
-          <div class="ach-card-accent teal"></div>
+        <div class="card ach-card reveal">
+          <div class="ach-glow purple"></div>
           <div class="ach-icon">👥</div>
-          <div class="ach-metric teal">8</div>
+          <div class="ach-num purple">8</div>
           <div class="ach-title">Engineers Led</div>
-          <div class="ach-desc">Leading a team of 8, setting technical direction, managing delivery, and creating an environment where engineers do their best work with clear ownership and high standards.</div>
+          <div class="ach-desc">Setting technical direction, managing delivery, and building an environment where engineers do their best work with clear ownership and high standards.</div>
         </div>
-
       </div>
     </div>
   </section>
@@ -533,12 +449,12 @@
   <!-- SKILLS -->
   <section id="skills" class="section-pad">
     <div class="container">
-      <div class="section-chip reveal">Skills</div>
-      <div class="section-title reveal">What I bring</div>
+      <div class="s-label reveal">Skills</div>
+      <div class="s-title reveal">What I bring</div>
       <div class="skills-grid">
-        <div class="g-card reveal">
-          <div class="skill-group-label">Leadership</div>
-          <div class="chip-list">
+        <div class="card reveal">
+          <div class="skill-label">Leadership</div>
+          <div class="chip-wrap">
             <span class="chip">Team Management</span>
             <span class="chip">Engineering Strategy</span>
             <span class="chip">Hiring & Mentorship</span>
@@ -547,9 +463,9 @@
             <span class="chip">Cross-functional Collaboration</span>
           </div>
         </div>
-        <div class="g-card reveal">
-          <div class="skill-group-label">Reliability & Operations</div>
-          <div class="chip-list">
+        <div class="card reveal">
+          <div class="skill-label">Reliability & Ops</div>
+          <div class="chip-wrap">
             <span class="chip">SLA Engineering</span>
             <span class="chip">Observability</span>
             <span class="chip">Metrics & Alerting</span>
@@ -558,9 +474,9 @@
             <span class="chip">Dashboards</span>
           </div>
         </div>
-        <div class="g-card reveal">
-          <div class="skill-group-label">Engineering</div>
-          <div class="chip-list">
+        <div class="card reveal">
+          <div class="skill-label">Engineering</div>
+          <div class="chip-wrap">
             <span class="chip">Distributed Systems</span>
             <span class="chip">Backend Development</span>
             <span class="chip">System Design</span>
@@ -576,28 +492,28 @@
   <!-- CONTACT -->
   <section id="contact" class="section-pad">
     <div class="container">
-      <div class="section-chip reveal">Contact</div>
-      <div class="section-title reveal">Let's talk</div>
-      <div class="g-card reveal">
+      <div class="s-label reveal">Contact</div>
+      <div class="s-title reveal">Let's talk</div>
+      <div class="card reveal">
         <div class="contact-grid">
-          <div class="contact-text">
-            <h3>Open to leadership roles</h3>
-            <p>Building an engineering org and need a leader who combines technical depth with a track record of driving team performance? Let's connect.</p>
-            <a class="btn btn-primary" href="mailto:manumangunuru@gmail.com">Send a Message</a>
+          <div>
+            <div class="c-head">Open to leadership roles</div>
+            <div class="c-body">Building an engineering org and need a leader who combines technical depth with a track record of driving team performance? Let's connect.</div>
+            <a class="btn btn-ios" href="mailto:manumangunuru@gmail.com">Send a Message</a>
           </div>
-          <div class="contact-links">
-            <a class="clink" href="mailto:manumangunuru@gmail.com">
-              <div class="clink-icon blue">✉️</div>
+          <div class="c-links">
+            <a class="c-link" href="mailto:manumangunuru@gmail.com">
+              <div class="c-icon mail">✉️</div>
               <div>
-                <div class="clink-title">Email</div>
-                <div class="clink-sub">manumangunuru@gmail.com</div>
+                <div class="c-link-title">Email</div>
+                <div class="c-link-sub">manumangunuru@gmail.com</div>
               </div>
             </a>
-            <a class="clink" href="https://www.linkedin.com/in/manmohanreddym/" target="_blank" rel="noopener">
-              <div class="clink-icon li">💼</div>
+            <a class="c-link" href="https://www.linkedin.com/in/manmohanreddym/" target="_blank" rel="noopener">
+              <div class="c-icon li">💼</div>
               <div>
-                <div class="clink-title">LinkedIn</div>
-                <div class="clink-sub">linkedin.com/in/manmohanreddym</div>
+                <div class="c-link-title">LinkedIn</div>
+                <div class="c-link-sub">linkedin.com/in/manmohanreddym</div>
               </div>
             </a>
           </div>
@@ -606,13 +522,11 @@
     </div>
   </section>
 
-  <footer>
-    <p>© 2026 Manmohan Reddy Mangunuru</p>
-  </footer>
+  <footer>© 2026 Manmohan Reddy Mangunuru</footer>
 
   <script>
     const io = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+      es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
       { threshold: 0.1 }
     );
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
